@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Empresa techos | Techos y cerramientos de diseño</title>
+  <meta name="description" content="Arquitectos especializados en techos y cerramientos. Diseñamos, fabricamos e instalamos soluciones en vidrio, policarbonato, chapa y aluminio en toda Argentina.">
+
+  <!-- Bootstrap 5 (CDN, no necesitás descargar nada) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tipografías: Lato (títulos) + Roboto (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --negro: #000;
+      --carbon: #14171a;
+      --verde: #1a9e6b;
+      --verde-oscuro: #12744e;
+      --gris: #6b7176;
+      --gris-claro: #f3f4f5;
+      --linea: #e2e4e6;
+      --blanco: #fff;
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      font-family: "Roboto", system-ui, sans-serif;
+      font-weight: 300;
+      color: var(--gris);
+      background: var(--blanco);
+      line-height: 1.7;
+    }
+    h1, h2, h3, h4, h5 { font-family: "Lato", system-ui, sans-serif; color: var(--negro); letter-spacing: -0.01em; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--verde); outline-offset: 3px; }
+
+    /* ---------- Navbar ---------- */
+    .navbar { background: var(--blanco); border-bottom: 1px solid var(--linea); min-height: 78px; }
+    .navbar-brand { font-family: "Lato", sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--negro); letter-spacing: 0.02em; }
+    .navbar-brand span { color: var(--verde); }
+    .navbar .nav-link { font-family: "Lato", sans-serif; font-weight: 700; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; color: var(--negro); padding: .5rem 1rem; }
+    .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--verde); }
+    .btn-cotizar {
+      background: var(--negro); color: var(--blanco); border-radius: 0; font-family: "Lato", sans-serif; font-weight: 700;
+      padding: .9rem 1.6rem; border: 2px solid var(--negro); transition: background .2s, border-color .2s;
+    }
+    .btn-cotizar:hover { background: var(--verde); border-color: var(--verde); color: var(--blanco); }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; min-height: min(78vh, 720px); display: flex; align-items: flex-end; background: var(--carbon); overflow: hidden; }
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.75) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 4rem 0 0; width: 100%; }
+    .hero h1 { color: var(--blanco); font-weight: 900; font-size: clamp(2.2rem, 5.5vw, 4.4rem); line-height: 1.05; max-width: 16ch; }
+    .hero p.lead { color: rgba(255,255,255,.85); max-width: 52ch; font-size: 1.15rem; margin: 1.25rem 0 2rem; }
+    .hero .btn-verde { background: var(--verde); color: var(--blanco); border-radius: 0; font-family: "Lato", sans-serif; font-weight: 700; padding: .9rem 1.8rem; border: 2px solid var(--verde); }
+    .hero .btn-verde:hover { background: var(--verde-oscuro); border-color: var(--verde-oscuro); color: var(--blanco); }
+    .hero .btn-borde { color: var(--blanco); border: 2px solid rgba(255,255,255,.8); border-radius: 0; font-family: "Lato", sans-serif; font-weight: 700; padding: .9rem 1.8rem; }
+    .hero .btn-borde:hover { background: var(--blanco); color: var(--negro); }
+
+    .pilares { background: var(--negro); position: relative; z-index: 2; margin-top: 4rem; }
+    .pilar { padding: 1.6rem 1.5rem; border-left: 3px solid var(--verde); margin: 1.25rem 0; }
+    .pilar h3 { color: var(--blanco); font-size: 1.15rem; font-weight: 700; margin: 0 0 .25rem; }
+    .pilar p { color: rgba(255,255,255,.65); margin: 0; font-size: .95rem; line-height: 1.5; }
+
+    /* ---------- Secciones ---------- */
+    section { padding: 6rem 0; }
+    .titulo-seccion { font-weight: 900; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.25rem; }
+    .marca-agua { position: relative; }
+    .marca-agua::before {
+      content: attr(data-marca); position: absolute; top: -.55em; left: -.05em; z-index: 0; pointer-events: none;
+      font-family: "Lato", sans-serif; font-weight: 900; font-size: clamp(4rem, 11vw, 9rem); line-height: 1;
+      color: transparent; -webkit-text-stroke: 1px var(--linea); letter-spacing: .02em; white-space: nowrap;
+    }
+    .marca-agua > * { position: relative; z-index: 1; }
+    strong { font-weight: 500; color: #3d4247; }
+
+    /* Nosotros */
+    .collage { position: relative; padding-bottom: 5rem; }
+    .collage .foto-a { width: 62%; aspect-ratio: 3/4; object-fit: cover; background: #cfd3d6; display: block; }
+    .collage .foto-b { position: absolute; top: 12%; right: 0; width: 58%; aspect-ratio: 2/3; object-fit: cover; background: #b9bec2; border: 14px solid var(--blanco); }
+    .sello { position: absolute; bottom: 0; left: 30%; background: var(--negro); color: var(--blanco); padding: 1.4rem 2.2rem; }
+    .sello b { display: block; font-family: "Lato", sans-serif; font-size: 2.6rem; font-weight: 900; line-height: 1; }
+    .sello span { font-size: .9rem; }
+    .sello b sup { color: var(--verde); font-size: 1.4rem; }
+
+    .frase { font-family: "Lato", sans-serif; font-weight: 900; color: var(--negro); text-transform: uppercase; font-size: 1.15rem; line-height: 1.3; margin: 1.5rem 0 2rem; }
+    .valor { display: flex; gap: 1.25rem; margin-bottom: 1.6rem; }
+    .valor .icono { flex: 0 0 60px; height: 60px; background: var(--negro); display: grid; place-items: center; }
+    .valor .icono svg { width: 28px; height: 28px; stroke: var(--blanco); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .valor h3 { font-size: 1.25rem; font-weight: 700; margin: 0 0 .1rem; }
+    .valor p { margin: 0; }
+
+    /* Objetivo */
+    .objetivo { background: var(--gris-claro); }
+    .objetivo .cifra { font-family: "Lato", sans-serif; font-weight: 900; font-size: 3rem; color: var(--negro); line-height: 1; }
+    .objetivo .cifra sup { color: var(--verde); font-size: 1.5rem; }
+    .objetivo .cifra-label { font-size: .95rem; margin-top: .4rem; }
+    .objetivo blockquote { border-left: 4px solid var(--verde); padding-left: 1.5rem; font-family: "Lato", sans-serif; font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 700; color: var(--negro); line-height: 1.35; margin: 0 0 2rem; }
+
+    /* ---------- Carrusel de productos ---------- */
+    .productos { background: var(--negro); color: rgba(255,255,255,.7); }
+    .productos .titulo-seccion { color: var(--blanco); }
+    .productos .marca-agua::before { -webkit-text-stroke-color: rgba(255,255,255,.14); }
+    .carrusel-controles { display: flex; gap: .6rem; }
+    .carrusel-controles button {
+      width: 52px; height: 52px; border: 2px solid rgba(255,255,255,.6); background: transparent; color: var(--blanco);
+      display: grid; place-items: center; transition: background .2s, border-color .2s;
+    }
+    .carrusel-controles button:hover:not(:disabled) { background: var(--verde); border-color: var(--verde); }
+    .carrusel-controles button:disabled { opacity: .3; cursor: not-allowed; }
+    .carrusel-controles svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .carrusel {
+      display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+      padding: .5rem 0 1.5rem; scrollbar-width: thin; scrollbar-color: var(--verde) rgba(255,255,255,.12);
+      cursor: grab; -webkit-overflow-scrolling: touch;
+    }
+    .carrusel.arrastrando { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
+    .carrusel::-webkit-scrollbar { height: 6px; }
+    .carrusel::-webkit-scrollbar-track { background: rgba(255,255,255,.12); }
+    .carrusel::-webkit-scrollbar-thumb { background: var(--verde); }
+
+    .tarjeta { flex: 0 0 min(340px, 82vw); scroll-snap-align: start; background: var(--carbon); display: flex; flex-direction: column; }
+    .tarjeta .foto { aspect-ratio: 4/3; width: 100%; object-fit: cover; background: #2a2f33; display: block; pointer-events: none; }
+    .tarjeta .cuerpo { padding: 1.5rem; border-top: 3px solid var(--verde); flex: 1; }
+    .tarjeta h3 { color: var(--blanco); font-size: 1.3rem; font-weight: 700; margin-bottom: .6rem; }
+    .tarjeta p { font-size: .95rem; line-height: 1.55; margin-bottom: .75rem; }
+    .tarjeta ul { list-style: none; padding: 0; margin: 0; font-size: .92rem; line-height: 1.5; }
+    .tarjeta li { padding-left: 1.1rem; position: relative; margin-bottom: .35rem; }
+    .tarjeta li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; background: var(--verde); }
+
+    /* ---------- Contacto / CTA ---------- */
+    .cta h2 { max-width: 22ch; }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--negro); color: rgba(255,255,255,.65); padding: 3rem 0 2rem; border-top: 1px solid rgba(255,255,255,.12); }
+    footer .marca { font-family: "Lato", sans-serif; font-weight: 900; color: var(--blanco); font-size: 1.4rem; }
+    footer .marca span { color: var(--verde); }
+    .redes { display: flex; gap: .75rem; }
+    .redes a { width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.4); display: grid; place-items: center; color: var(--blanco); transition: background .2s, border-color .2s; }
+    .redes a:hover { background: var(--verde); border-color: var(--verde); }
+    .redes svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    footer small { font-size: .85rem; }
+
+    @media (max-width: 991.98px) {
+      section { padding: 4rem 0; }
+      .collage { max-width: 480px; margin: 0 auto 3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html, .carrusel { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <!-- Reemplazá por tu logo: <a class="navbar-brand" href="#inicio"><img src="LOGO" alt="Empresa techos" height="44"></a> -->
+      <a class="navbar-brand" href="#inicio">Empresa <span>techos</span></a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+        <a href="" class="btn btn-cotizar">Cotización online</a> <!-- COMPLETAR: link de cotización -->
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <header class="hero" id="inicio">
+      <!-- COMPLETAR: imagen principal (ej: una obra terminada, horizontal, mínimo 1600px de ancho) -->
+      <img class="hero-img" src="img/WhatsApp Image 2026-09-15 at 17.03.39.jpeg" alt="Techo de vidrio y cerramiento en una obra terminada">
+
+      <div class="hero-content">
+        <div class="container">
+          <h1>Techos y cerramientos de diseño</h1>
+          <p class="lead">Somos arquitectos especializados en techos y cerramientos. Diseñamos, fabricamos e instalamos en toda Argentina.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="" class="btn btn-verde">Pedí tu cotización</a> <!-- COMPLETAR: link -->
+            <a href="#productos" class="btn btn-borde">Ver productos</a>
+          </div>
+
+          <div class="pilares">
+            <div class="row">
+              <div class="col-md-4"><div class="pilar"><h3>Compromiso y responsabilidad</h3><p>Cumplimos los plazos y nos hacemos cargo de cada obra.</p></div></div>
+              <div class="col-md-4"><div class="pilar"><h3>Diseños de calidad</h3><p>Materiales y terminaciones pensados para durar.</p></div></div>
+              <div class="col-md-4"><div class="pilar"><h3>Conceptos profesionales e innovadores</h3><p>Soluciones a medida, con criterio de arquitectos.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= NOSOTROS ================= -->
+    <section id="nosotros">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="collage">
+              <!-- COMPLETAR: dos fotos de obras (la primera vertical, la segunda vertical) -->
+              <img class="foto-a" src="img/WhatsApp Image 2026-09-15 at 17.03.39.jpeg" alt="Cerramiento de vidrio con vista al exterior">
+              <img class="foto-b" src="img/WhatsApp Image 2026-09-15 at 17.03.40.jpeg" alt="Techo de vidrio con estructura negra en un patio">
+              <div class="sello"><b>23<sup>+</sup></b><span>años de trayectoria</span></div> <!-- Editá los años -->
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="marca-agua" data-marca="NOSOTROS">
+              <h2 class="titulo-seccion">Sobre nosotros</h2>
+              <p>En <strong>Empresa techos</strong> somos <strong>arquitectos especializados en techos y cerramientos</strong>. Diseñamos, fabricamos e instalamos soluciones <strong>innovadoras y duraderas</strong> para hogares, empresas y obras en toda Argentina.</p>
+              <p>Nos destacamos por la <strong>calidad, precisión y tecnología</strong> en cada proyecto, creando espacios funcionales y estéticamente únicos.</p>
+            </div>
+
+            <p class="frase">Confiá en nosotros. Tu lugar es único, nuestros trabajos también.</p>
+
+            <div class="valor">
+              <div class="icono"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+              <div><h3>Experiencia</h3><p>Con la trayectoria y profesionalismo de un equipo de arquitectos y especialistas con amplia experiencia.</p></div>
+            </div>
+            <div class="valor">
+              <div class="icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg></div>
+              <div><h3>Diseño</h3><p>Como tu lugar es único, nuestros proyectos también. Diseñamos soluciones a medida.</p></div>
+            </div>
+            <div class="valor">
+              <div class="icono"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M3 21c0-4 3-7 7-7"/><path d="M18 15v6M15 18h6"/></svg></div>
+              <div><h3>Atención</h3><p>Desde tu primer contacto hasta el final de obra, te asesoramos y acompañamos en cada etapa.</p></div>
+            </div>
+            <div class="valor mb-0">
+              <div class="icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+              <div><h3>Cumplimiento</h3><p>Trabajamos con plazos claros y respetamos lo acordado.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OBJETIVO ================= -->
+    <section class="objetivo" id="objetivo">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-7">
+            <h2 class="titulo-seccion">Nuestro objetivo</h2>
+            <blockquote>Crear espacios cubiertos y cerrados que se disfruten todo el año, con diseño, calidad y una instalación sin sorpresas.</blockquote>
+            <p>Buscamos que cada cliente tenga una solución hecha a su medida: que aproveche la luz natural, proteja del clima y sume valor a su propiedad. Para eso trabajamos con arquitectos, fabricamos con tecnología y acompañamos el proyecto de principio a fin.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="row g-4 text-center text-lg-start">
+              <div class="col-6"><div class="cifra">23<sup>+</sup></div><div class="cifra-label">Años de trayectoria</div></div>
+              <div class="col-6"><div class="cifra">100<sup>%</sup></div><div class="cifra-label">Fabricación y colocación propias</div></div>
+              <div class="col-12"><div class="cifra">Todo el país</div><div class="cifra-label">Obras para hogares, empresas y proyectos en Argentina</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRODUCTOS (CARRUSEL) ================= -->
+    <section class="productos" id="productos">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div class="marca-agua" data-marca="PRODUCTOS">
+            <h2 class="titulo-seccion mb-0">Lo que hacemos</h2>
+          </div>
+          <div class="carrusel-controles">
+            <button type="button" id="prev" aria-label="Producto anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button type="button" id="next" aria-label="Producto siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+
+        <div class="carrusel" id="carrusel" tabindex="0" aria-label="Carrusel de productos">
+
+          <!-- COMPLETAR: cada src="" es la foto de ese producto -->
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.39.jpeg" alt="Techo móvil de vidrio">
+            <div class="cuerpo">
+              <h3>Techos móviles</h3>
+              <ul>
+                <li>Vidrio laminado incoloro 3+3</li>
+                <li>Control solar laminado 4+4</li>
+                <li>DVH control solar laminado 3+3, cámara de 12 mm y laminado control solar 4+4</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.40.jpeg" alt="Techo fijo de vidrio">
+            <div class="cuerpo">
+              <h3>Techos fijos</h3>
+              <p>En vidrio y policarbonato, con estructura a medida.</p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.41.jpeg" alt="Pérgola">
+            <div class="cuerpo">
+              <h3>Pérgolas</h3>
+              <p>En vidrio, chapa y combinadas.</p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.42.jpeg" alt="Baranda de vidrio">
+            <div class="cuerpo">
+              <h3>Barandas de vidrio</h3>
+              <p>Seguridad y vista despejada para balcones, terrazas y escaleras.</p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.41.jpeg" alt="Cerramiento de aluminio">
+            <div class="cuerpo">
+              <h3>Cerramientos de aluminio</h3>
+              <p>Cerramos galerías, balcones y terrazas con estructuras livianas y duraderas.</p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.42.jpeg" alt="Piel de vidrios">
+            <div class="cuerpo">
+              <h3>Piel de vidrios</h3>
+              <p>Fachadas vidriadas continuas para obras residenciales y comerciales.</p>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.41.jpeg" alt="Carpintería de aluminio">
+            <div class="cuerpo">
+              <h3>Carpinterías de aluminio</h3>
+              <p>Proveemos y colocamos todas las líneas de ventanas y aberturas:</p>
+              <ul>
+                <li>Línea Herrero Clásica</li>
+                <li>Línea Herrero Pesada</li>
+                <li>Línea Rotonda</li>
+                <li>Línea Módena</li>
+                <li>Tabiques divisores de oficinas</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.42.jpeg" alt="Techo traslúcido">
+            <div class="cuerpo">
+              <h3>Techos traslúcidos y transparentes</h3>
+              <ul>
+                <li>Vidrio armado</li>
+                <li>Vidrio laminado</li>
+                <li>Policarbonato alveolar y compacto</li>
+                <li>Poliacrílico</li>
+                <li>Fijos y corredizos</li>
+                <li>Estructura de aluminio</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.41.jpeg" alt="Techo opaco de tejas o chapa">
+            <div class="cuerpo">
+              <h3>Techos opacos</h3>
+              <ul>
+                <li>Tejas sobre estructura de madera</li>
+                <li>Chapa sobre estructura de madera</li>
+                <li>Chapa sobre estructura metálica</li>
+                <li>Techos mixtos, con sectores traslúcidos</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="tarjeta">
+            <img class="foto" src="img/WhatsApp Image 2026-09-15 at 17.03.42.jpeg" alt="Cerramiento integral de quincho">
+            <div class="cuerpo">
+              <h3>Cerramientos integrales</h3>
+              <p>Con estos sistemas creamos espacios para:</p>
+              <ul>
+                <li>Quinchos</li>
+                <li>Cocheras</li>
+                <li>Jardines de invierno</li>
+                <li>Patios cubiertos</li>
+                <li>Playrooms</li>
+                <li>Balcones</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA / CONTACTO ================= -->
+    <section class="cta" id="contacto">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <h2 class="titulo-seccion">¿Tenés un proyecto en mente?</h2>
+            <p class="mb-0">Contanos qué espacio querés cubrir o cerrar y te asesoramos desde la primera consulta hasta el final de obra.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="" class="btn btn-cotizar">Cotización online</a> <!-- COMPLETAR: link -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container">
+      <div class="row align-items-center gy-4">
+        <div class="col-md-4 marca">Empresa <span>techos</span></div>
+
+        <div class="col-md-4 text-md-center">
+          <div class="redes justify-content-md-center">
+            <!-- COMPLETAR: link de Instagram -->
+            <a href="https://www.instagram.com/vercee_pepo/" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".8" fill="currentColor"/></svg>
+            </a>
+            <!-- COMPLETAR: link de teléfono (ej: tel:+5493510000000) -->
+            <a href="" aria-label="Teléfono">
+              <svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4 text-md-end">
+          <small>© <span id="anio">2026</span> Empresa techos. Todos los derechos reservados.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Año automático en el footer
+    document.getElementById('anio').textContent = new Date().getFullYear();
+
+    // ----- Carrusel horizontal: flechas + arrastre con mouse -----
+    const carrusel = document.getElementById('carrusel');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+
+    const paso = () => {
+      const t = carrusel.querySelector('.tarjeta');
+      return t.getBoundingClientRect().width + parseFloat(getComputedStyle(carrusel).columnGap || 24);
+    };
+    const actualizar = () => {
+      prev.disabled = carrusel.scrollLeft <= 4;
+      next.disabled = carrusel.scrollLeft + carrusel.clientWidth >= carrusel.scrollWidth - 4;
+    };
+    prev.addEventListener('click', () => carrusel.scrollBy({ left: -paso() }));
+    next.addEventListener('click', () => carrusel.scrollBy({ left:  paso() }));
+    carrusel.addEventListener('scroll', actualizar, { passive: true });
+    window.addEventListener('resize', actualizar);
+    carrusel.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') carrusel.scrollBy({ left: paso() });
+      if (e.key === 'ArrowLeft')  carrusel.scrollBy({ left: -paso() });
+    });
+
+    let down = false, startX = 0, startScroll = 0;
+    carrusel.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse') return;
+      down = true; startX = e.clientX; startScroll = carrusel.scrollLeft;
+      carrusel.classList.add('arrastrando');
+    });
+    window.addEventListener('pointermove', e => {
+      if (!down) return;
+      carrusel.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    window.addEventListener('pointerup', () => {
+      if (!down) return;
+      down = false;
+      carrusel.classList.remove('arrastrando');
+    });
+    actualizar();
+
+        // ----- Navbar: colorea la sección activa (al hacer clic y al scrollear) -----
+        const linksNav = document.querySelectorAll('.navbar .nav-link');
+    const seccionesNav = [...linksNav].map(a => document.querySelector(a.getAttribute('href')));
+
+    function marcarNav(i) {
+      linksNav.forEach((a, j) => a.classList.toggle('active', i === j));
+    }
+
+    linksNav.forEach((a, i) => a.addEventListener('click', () => marcarNav(i)));
+
+    function actualizarNav() {
+      let actual = 0;
+      seccionesNav.forEach((s, i) => {
+        if (s.getBoundingClientRect().top <= 140) actual = i;
+      });
+      // Si llegó al final de la página, marca la última opción (Contacto)
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
+        actual = seccionesNav.length - 1;
+      }
+      marcarNav(actual);
+    }
+
+    window.addEventListener('scroll', actualizarNav, { passive: true });
+    actualizarNav();
+  </script>
+</body>
+</html>
